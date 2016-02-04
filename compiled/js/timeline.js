@@ -12620,6 +12620,7 @@ TL.Timeline = TL.Class.extend({
 			marker_padding: 			5,						// Top Bottom Marker Padding
 			start_at_slide: 			0,
 			start_at_end: 				false,
+			start_at_closest: 			false,
 			menubar_height: 			0,
 			skinny_size: 				650,
 			medium_size: 				800,
@@ -13342,6 +13343,19 @@ TL.Timeline = TL.Class.extend({
 		if (this._loaded.storyslider && this._loaded.timenav) {
 			this.fire("loaded", this.config);
 			// Go to proper slide
+			// START AT CURRENT DATE
+			if(this.options.start_at_closest && this.options.start_at_slide == 0) {
+				this.options.start_at_slide = 0;
+				var now = Date.now();
+				//alert(this.config.events[0].start_date.getTime());
+				for(var i = 0; i < this.config.events.length; i++) {
+					if(this.config.events[i].start_date.getTime() > now && this.options.start_at_slide == 0) {
+						this.options.start_at_slide = i;
+						//alert(now);
+						break;
+					}
+				}
+			}
 			if (this.options.hash_bookmark && window.location.hash != "") {
 				this.goToId(window.location.hash.replace("#event-", ""));
 			} else {
