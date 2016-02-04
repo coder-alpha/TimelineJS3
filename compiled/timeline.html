@@ -35,9 +35,10 @@
     <!-- JavaScript-->
     <script src="js/timeline.js"></script>
     <script>
-      var timeline = new TL.Timeline('timeline', 'examples/welcome.json', {
+      var timeline = new TL.Timeline('timeline', 'http://main.xfiddle.com/50a77b49/epg.php?surl=http://www.locatetv.com/listings/history&json=true&ch=History&chLogo=http://2.bp.blogspot.com/-QSfFAp_jqP0/T3DH2aXPHUI/AAAAAAAABdg/5a9_qDD92AQ/s1600/h5.png', {
       	theme_color: "#288EC3",
-      	ga_property_id: "UA-27829802-4"
+		    start_at_closest: true,
+      	ga_property_id: ""
       });
     </script>
   </body>
