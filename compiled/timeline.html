@@ -35,9 +35,34 @@
     <!-- JavaScript-->
     <script src="js/timeline.js"></script>
     <script>
-      var timeline = new TL.Timeline('timeline', 'http://main.xfiddle.com/50a77b49/epg.php?surl=http://www.locatetv.com/listings/history&json=true&ch=History&chLogo=http://2.bp.blogspot.com/-QSfFAp_jqP0/T3DH2aXPHUI/AAAAAAAABdg/5a9_qDD92AQ/s1600/h5.png', {
+	
+	var surl = 'http://www.locatetv.com/listings/history';
+	var ch = 'History';
+	var chLogo = 'http://2.bp.blogspot.com/-QSfFAp_jqP0/T3DH2aXPHUI/AAAAAAAABdg/5a9_qDD92AQ/s1600/h5.png';
+	
+	var trim_point = window.location.href.indexOf('?surl=');
+    if (trim_point > 0) {
+      var paramsU = window.location.href.substring(trim_point+1, window.location.href.length);
+	  if (paramsU.indexOf('&') > -1) {
+		var params = paramsU.split('&');
+		for (var i=0; i < params.length; i++) {
+			var p = params[i].split('=');
+			if (p[0] == 'surl') {
+				surl = p[1];
+			} else if (p[0] == 'ch') {
+				ch = p[1];
+			} else if (p[0] == 'chLogo') {
+				chLogo = p[1];
+			}
+		}
+	  }
+	  //alert(surl);
+    }
+	
+      var timeline = new TL.Timeline('timeline', 'http://main.xfiddle.com/50a77b49/epg.php?surl='+surl+'&json=true&ch='+ch+'&chLogo='+chLogo, {
       	theme_color: "#288EC3",
-		    start_at_closest: true,
+		start_at_closest: true,
+		scale_factor: 1,
       	ga_property_id: ""
       });
     </script>
